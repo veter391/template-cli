@@ -14,7 +14,7 @@ const QUESTIONS = [
   {
     name: 'project-choice',
     type: 'list',
-    message: 'What project template would you like to generate?',
+    message: '¿Qué plantilla te gustaría generar?',
     choices: CHOICES,
   },
   {
@@ -22,8 +22,8 @@ const QUESTIONS = [
     type: 'input',
     message: 'Project name:',
     validate: function (input) {
-      if (/^([A-Za-z\-\\_\d])+$/.test(input)) return true;
-      else return 'Project name may only include letters, numbers, underscores and hashes.';
+      if (/^([A-Za-z\-\\_\d])+$/.test(input) || input === '') return true;
+      else return 'El nombre de los proyectos solo puede incluir letras, números, guiones medios y bajos o que el nombre sea un texto vacío.';
     },
   },
 ];
