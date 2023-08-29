@@ -16,13 +16,24 @@ const createDirectoryContents = (templatePath, newProjectPath) => {
       // Rename
       if (file === '.npmignore') file = '.gitignore';
 
-      const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
+      const writePath = newProjectPath !== '.' 
+        ? `${CURR_DIR}/${newProjectPath}/${file}`
+        : `${CURR_DIR}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
     } else if (stats.isDirectory()) {
-      fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`);
+
+      if (newProjectPath !== '.') {
+        fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`);
+      } else {
+        fs.mkdirSync(`${CURR_DIR}/${file}`);
+      }
 
       // recursive call
-      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`);
+      if (newProjectPath !== '.') {
+        createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`);
+      } else {
+        createDirectoryContents(`${templatePath}/${file}`, `./${file}`);
+      }
     }
   });
 };

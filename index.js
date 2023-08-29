@@ -22,7 +22,7 @@ const QUESTIONS = [
     type: 'input',
     message: 'Project name:',
     validate: function (input) {
-      if (/^([A-Za-z\-\\_\d])+$/.test(input) || input === '') return true;
+      if (/^([A-Za-z\-\\_\d])+$/.test(input) || input === '.') return true;
       else return 'El nombre de los proyectos solo puede incluir letras, números, guiones medios y bajos o que el nombre sea un texto vacío.';
     },
   },
@@ -30,10 +30,15 @@ const QUESTIONS = [
 
 inquirer.prompt(QUESTIONS).then(answers => {
   const projectChoice = answers['project-choice'];
+  console.log(projectChoice);
   const projectName = answers['project-name'];
+  console.log(projectName);
   const templatePath = `${__dirname}/templates/${projectChoice}`;
+  console.log(templatePath);
 
-  fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+  if (projectName !== '.') {
+    fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+  }
 
   createDirectoryContents(templatePath, projectName);
 });
