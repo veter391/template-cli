@@ -14,7 +14,7 @@ const QUESTIONS = [
   {
     name: 'project-choice',
     type: 'list',
-    message: '¿Qué plantilla te gustaría generar?',
+    message: 'Which template would you like to generate?',
     choices: CHOICES,
   },
   {
@@ -23,18 +23,15 @@ const QUESTIONS = [
     message: 'Project name:',
     validate: function (input) {
       if (/^([A-Za-z\-\\_\d])+$/.test(input) || input === '.') return true;
-      else return 'El nombre de los proyectos solo puede incluir letras, números, guiones medios y bajos o que el nombre sea un texto vacío.';
+      else return 'Project names can only include letters, numbers, hyphens and underscores. You can also use a dot to create it in the current folder.';
     },
   },
 ];
 
 inquirer.prompt(QUESTIONS).then(answers => {
   const projectChoice = answers['project-choice'];
-  console.log(projectChoice);
   const projectName = answers['project-name'];
-  console.log(projectName);
   const templatePath = `${__dirname}/templates/${projectChoice}`;
-  console.log(templatePath);
 
   if (projectName !== '.') {
     fs.mkdirSync(`${CURR_DIR}/${projectName}`);
