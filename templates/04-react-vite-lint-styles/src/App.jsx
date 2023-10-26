@@ -1,8 +1,8 @@
 function App () {
     return (
-        <>
-            <h1>Proyecto de React</h1>
-        </>
+        <div className='center-vertical'>
+            <h1>Proyecto de React 🤘</h1>
+        </div>
     );
 }
 
