@@ -11,6 +11,6 @@ npm i -g template-cli
 ```bash
 # folow next command to configuration
 tsc --all
-# folow nexyt command to select structure
+# folow next command to select structure
 template-cli
 ```
